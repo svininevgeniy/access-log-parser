@@ -1,15 +1,25 @@
+import java.io.File;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Введите число №1:");
-        int number1 = new Scanner(System.in).nextInt();
-        System.out.println("Введите число №2:");
-        int number2 = new Scanner(System.in).nextInt();
-        double quotient = (double) number1 / number2;
-        System.out.println("Сумма этих чисел равна: " + (number1 + number2));
-        System.out.println("Разность этих чисел равна: " + (number1 - number2));
-        System.out.println("Произведение этих чисел равно: " + (number1 * number2));
-        System.out.println("Частное этих чисел равно: " + quotient);
+        int numberFile = 0;
+
+        while (true) {
+            String path = new Scanner(System.in).nextLine();
+            File file = new File(path);
+            boolean fileExists = file.exists();
+            boolean isDirectory = file.isDirectory();
+
+            if (!fileExists || isDirectory) {
+                System.out.println("File is not exist or you entered path to directory. Please repeat enter:");
+                continue;
+            } else {
+                numberFile++;
+                System.out.println("Path is correct. It is file №" + numberFile);
+
+            }
+        }
     }
 }
+
