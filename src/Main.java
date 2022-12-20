@@ -1,4 +1,6 @@
-import java.io.File;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class Main {
@@ -18,6 +20,26 @@ public class Main {
                 numberFile++;
                 System.out.println("Path is correct. It is file №" + numberFile);
 
+            }
+
+            try {
+                FileReader fileReader = new FileReader(path);
+                BufferedReader reader =
+                        new BufferedReader(fileReader);
+                String line;
+                ArrayList<Integer> lengthsOfLines = new ArrayList<Integer>();
+                while ((line = reader.readLine()) != null) {
+                    int length = line.length();
+                    if (length > 1024) throw new RuntimeException("Some line in the file has length over 1024 symbols");
+                    lengthsOfLines.add(length);
+                }
+                System.out.println(lengthsOfLines.size());
+                System.out.println(Collections.max(lengthsOfLines));
+                System.out.println(Collections.min(lengthsOfLines));
+            } catch (FileNotFoundException exception1) {
+                exception1.printStackTrace();
+            } catch (IOException exception2) {
+                exception2.printStackTrace();
             }
         }
     }
